@@ -28,8 +28,8 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	Vector3 changeToGroundMovement()
 	{
-		Vector3 movement = Camera.main.transform.right * Input.GetAxis ("Horizontal") +
-			Camera.main.transform.forward * Input.GetAxis ("Vertical");
+		Vector3 movement = Camera.main.transform.right * Input.GetAxisRaw ("Horizontal") +
+			Camera.main.transform.forward * Input.GetAxisRaw ("Vertical");
 		movement.y = 0;
 		movement.Normalize ();
 		return movement * speed;
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
 	private void ProgressStepCycle(float speed)
 	{
 		if (m_CharacterController.velocity.sqrMagnitude > 0 &&
-			(Input.GetAxis ("Horizontal") != 0 || Input.GetAxis ("Vertical") != 0))
+			(Input.GetAxisRaw ("Horizontal") != 0 || Input.GetAxisRaw ("Vertical") != 0))
 		{
 			m_StepCycle += (m_CharacterController.velocity.magnitude + speed)*
 				Time.fixedDeltaTime;
