@@ -20,18 +20,16 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	void Update() // called once per frame
 	{
-		m_CharacterController.SimpleMove(changeToGroundMovement());
+		m_CharacterController.SimpleMove(calculateMovementVector());
 	}
 	void FixedUpdate()
 	{
 		ProgressStepCycle(speed);
 	}
-	Vector3 changeToGroundMovement()
+	private Vector3 calculateMovementVector()
 	{
-		Vector3 movement = Camera.main.transform.right * Input.GetAxisRaw ("Horizontal") +
-			Camera.main.transform.forward * Input.GetAxisRaw ("Vertical");
-		movement.y = 0;
-		movement.Normalize ();
+		Vector3 movement = Camera.main.transform.right * Input.GetAxis ("Horizontal") +
+			Camera.main.transform.forward * Input.GetAxis ("Vertical");
 		return movement * speed;
 	}
 	private void ProgressStepCycle(float speed)
