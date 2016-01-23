@@ -1,29 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BookController : MonoBehaviour {
+public class BellController : MonoBehaviour {
 	private GameObject player;
-	private GameObject openBook;
 	private GameController gc;
+	private CardboardAudioSource src;
 	private bool gazedAt;
 	public float interactionDistance;
 	// Use this for initialization
 	void Start () {
+		src = GetComponent<CardboardAudioSource> ();
 		player = GameObject.FindWithTag ("Player");
-		openBook = GameObject.FindWithTag ("OpenBook");
-		openBook.SetActive (false);
 		gc = (GameController) FindObjectOfType(typeof(GameController));
 		gazedAt = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (gc.ActiveBook() && gc.GetInteractionKey() && gazedAt &&
+		if (gc.ActiveBell() && gc.GetInteractionKey() && gazedAt &&
 			Vector3.Distance(transform.position, player.transform.position) < interactionDistance) {
-			openBook.SetActive (true);
-			ReadBook read = (ReadBook) FindObjectOfType(typeof(ReadBook));
-			read.BeginReading ();
-			Destroy (gameObject);
+			gc.bell = true;
+			src.Play ();
+		}
+		if (gc.SceneComplete ()) {
+			src.Stop ();
 		}
 	}
 	public void SetGazedAt(bool gazedAt) {
