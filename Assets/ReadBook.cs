@@ -6,14 +6,10 @@ public class ReadBook : MonoBehaviour {
 	private GameController gc;
 	private LightController lc;
 
-	// Use this for initialization
-	void Start () {
+	public void BeginReading () {
 		src = GetComponent<CardboardAudioSource> ();
 		gc = (GameController) FindObjectOfType(typeof(GameController));
 		lc = (LightController) FindObjectOfType(typeof(LightController));
-	}
-	
-	public void BeginReading () {
 		src.Play ();
 		lc.holy = true;
 		StartCoroutine ("FinishReading");
