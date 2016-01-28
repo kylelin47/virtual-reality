@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public bool GetInteractionKey() {
-		return Input.GetKeyDown (KeyCode.Space);
+		return (Input.GetKeyDown (KeyCode.Space) || Input.GetButtonDown("Fire1"));
 	}
 
 	public bool SceneComplete() {
