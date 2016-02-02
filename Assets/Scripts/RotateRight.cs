@@ -36,7 +36,7 @@ public class RotateRight : MonoBehaviour {
 	}
 
 	private IEnumerator StopTurning() {
-		yield return new WaitForSeconds (3.0f);
+		yield return new WaitForSeconds (2.5f);
 		turning = false;
 		yield return new WaitForSeconds (1.5f);
 		turning = true;
